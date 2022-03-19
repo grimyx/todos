@@ -1,11 +1,15 @@
 <template>
 <h1>#todos</h1>
-<Tabs />
+<ButtonGroup @selected-filter="gg"/>
+<hr />
 </template>
 
 <script setup>
-import Tabs from './components/Tabs.vue';
+import ButtonGroup from './components/ButtonGroup.vue';
 
+const gg = (g) => {
+  console.log(g);
+}
 </script>
 
 <style lang="scss">
