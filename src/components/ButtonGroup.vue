@@ -44,10 +44,11 @@ const selectOption = (id) => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #tabs {
     display: flex;
     justify-content: space-around;
+    border-bottom: 1px solid #BDBDBD;
 }
 
 .option-selected { 

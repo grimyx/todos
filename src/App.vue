@@ -1,12 +1,19 @@
 <template>
-<h1>#todos</h1>
-<ButtonGroup @selected-filter="gg"/>
-<hr />
+  <div id="main">
+    <h1>#todos</h1>
+    <ButtonGroup @selected-filter="gg" />
+    <TodoItem v-bind="task"/>
+  </div>
 </template>
 
 <script setup>
 import ButtonGroup from './components/ButtonGroup.vue';
+import TodoItem from './components/TodoItem.vue';
 
+const task = {
+  task: "Kupi Sarmu",
+  isDone: true,
+}
 const gg = (g) => {
   console.log(g);
 }
@@ -14,7 +21,7 @@ const gg = (g) => {
 
 <style lang="scss">
 * {
-  margin:0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -26,5 +33,10 @@ const gg = (g) => {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#main {
+  width: 70%;
+  margin: 0 auto;
 }
 </style>
