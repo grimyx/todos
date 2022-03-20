@@ -1,13 +1,16 @@
 <template>
     <div id="todo-item">
-        <input type="checkbox" :checked="props.isDone"/>
+        <input type="checkbox" :disabled="props.isDone" 
+        :checked="props.isDone" @change="$emit('task-checked', props.taskId)"/>
         <p>{{props.task}}</p>
+        <span class="material-icons delete-btn" v-if="props.isDone">delete</span>
     </div>
 </template>
 
 <script setup>
 
-const props = defineProps(['task', 'isDone']);
+const props = defineProps(['taskId', 'task', 'isDone']);
+console.log(props);
 
 </script>
 
@@ -16,5 +19,12 @@ const props = defineProps(['task', 'isDone']);
     display: flex;
 }
 
+input:disabled {
+    color: blue;
+}
+
+delete-btn {
+    justify-self: flex-end;
+}
 /* stil ide posle */
 </style>
