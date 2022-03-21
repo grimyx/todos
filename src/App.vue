@@ -2,7 +2,7 @@
   <div id="main">
     <h1>#todos</h1>
     <ButtonGroup :buttons="btns" @selected-filter="gg" />
-    <TodoList :tasks="filterTasks(filterOption.filter, tasks)" @task-checked="taskChecked"/>
+    <TodoList :tasks="filterTasks(filterOption.filter, tasks)" @task-checked="taskChecked" @delete-task="deleteTask"/>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ const btns = reactive([
     {
         id: 0,
         title: "All",
-        selected: false,
+        selected: true,
         filterEmit: "all"
     },
     {
@@ -78,6 +78,16 @@ const taskChecked = (id) => {
 const gg = (id) => {
   console.log('Radi', id);
   btns.forEach(option => option.id === id ? option.selected = true : option.selected = false);
+}
+
+const deleteTask = (id) => {
+  /*
+  const s = tasks.filter(task => task.taskId === id);
+  const index = tasks.indexOf(s[0]);
+  console.log(s, index);
+  tasks.splice(index, 1);
+  */
+ console.log(id);
 }
 
 watch(btns, (newState) => {

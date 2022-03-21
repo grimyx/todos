@@ -3,15 +3,15 @@
         <input type="checkbox" :disabled="props.isDone" 
         :checked="props.isDone" @change="$emit('task-checked', props.taskId)"/>
         <p>{{props.task}}</p>
-        <span class="material-icons delete-btn" v-if="props.isDone">delete</span>
+        <IconButton :icon="deleteIcon" :onClick="() => console.log(props.taskId) " />
     </div>
 </template>
 
 <script setup>
-
+import IconButton from './IconButton.vue';
 const props = defineProps(['taskId', 'task', 'isDone']);
-console.log(props);
 
+const deleteIcon = 'delete';
 </script>
 
 <style scoped>
