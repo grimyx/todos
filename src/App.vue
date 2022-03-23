@@ -2,6 +2,7 @@
   <div id="main">
     <h1>#todos</h1>
     <ButtonGroup :buttons="btns" @selected-filter="gg" />
+    <TaskInput v-if="!btns[2].selected" @task-name="newTask"/>
     <TodoList :tasks="filterTasks(filterOption.filter, tasks)" @task-checked="taskChecked" @delete-task="deleteTask"/>
   </div>
 </template>
@@ -10,20 +11,21 @@
 import { reactive, watch } from 'vue';
 import ButtonGroup from './components/ButtonGroup.vue';
 import TodoList from './components/TaskList.vue';
+import TaskInput from './components/TaskInput.vue';
 
 const tasks = reactive([
   {
-    taskId: 1,
+    taskId: 0,
     task: "Kupi Sarmu",
     isDone: false,
   },
   {
-    taskId: 2,
+    taskId: 1,
     task: "Kupi sira braleeee",
     isDone: false,
   },
   {
-    taskId: 3,
+    taskId: 2,
     task: "Kupi secer braleeeee",
     isDone: false,
   }
@@ -80,15 +82,27 @@ const gg = (id) => {
   btns.forEach(option => option.id === id ? option.selected = true : option.selected = false);
 }
 
+// deleteTask - deletes task from list of tasks
+// params:
+// id - id of task we want to delete
 const deleteTask = (id) => {
-  /*
   const s = tasks.filter(task => task.taskId === id);
   const index = tasks.indexOf(s[0]);
-  console.log(s, index);
   tasks.splice(index, 1);
-  */
- console.log(id);
 }
+
+// newTask - creates new task object with task value from input that user entered
+// Value of taskId is size of tasks array, since task id starts from 0
+// isDone is set to false by default
+// params: 
+// task - task name, String
+const newTask = (task) => {
+  tasks.push({
+    taskId: tasks.length,
+    task: task,
+    isDone: false
+  })
+};
 
 watch(btns, (newState) => {
   filterOption.filter = newState.filter(option => option.selected )[0].filterEmit;
@@ -106,7 +120,6 @@ watch(btns, (newState) => {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -114,5 +127,9 @@ watch(btns, (newState) => {
 #main {
   width: 70%;
   margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
 }
 </style>

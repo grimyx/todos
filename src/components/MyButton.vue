@@ -88,6 +88,7 @@ div {
   display: flex;
   align-content: center;
   width: fit-content;
+  height: fit-content;
   font-weight: 700;
 }
 

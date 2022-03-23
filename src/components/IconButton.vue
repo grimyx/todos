@@ -1,18 +1,23 @@
 <template>
 <div id="icon-button">
-    <span class="material-icons" @click="props.onClick">{{ props.icon }}</span>
+    <span class="material-icons">{{props.icon}}</span>
 </div>
 </template>
 
 <script setup>
 
-const props = defineProps([
-    'icon',
-    'onClick'
-]);
+const props = defineProps(['icon']);
 </script>
 
-<style>
+<style scoped>
+#icon-button {
+    cursor:default;
+    display: flex;
+
+    /* floats to right */
+    margin-left: auto;
+}
+
 #icon-button:hover, :focus {
     color:red;
 }

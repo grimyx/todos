@@ -3,7 +3,7 @@
         <input type="checkbox" :disabled="props.isDone" 
         :checked="props.isDone" @change="$emit('task-checked', props.taskId)"/>
         <p>{{props.task}}</p>
-        <IconButton :icon="deleteIcon" :onClick="() => console.log(props.taskId) " />
+        <IconButton :icon="deleteIcon" @click="$emit('delete-task', props.taskId)" v-if="props.isDone" />
     </div>
 </template>
 
@@ -17,8 +17,18 @@ const deleteIcon = 'delete';
 <style scoped>
 #todo-item {
     display: flex;
+    margin: 0.5rem 0;
+    width: 100%;
+    align-items: center;
 }
 
+
+input {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    justify-self: flex-start;
+}
 input:disabled {
     color: blue;
 }

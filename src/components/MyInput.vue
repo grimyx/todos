@@ -3,14 +3,16 @@
     <p id="label">{{ this.label }}</p>
     <div id="inputBorder" :class="this.getStyles">
       <input
+        :value="modelValue"
         :placeholder="placeholder"
         :disabled="this.disabled"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
   </div>
 </template>
 
-<script>
+<script >
 export default {
   name: "MyInput",
   props: {
@@ -24,6 +26,7 @@ export default {
     },
     error: Boolean,
     disabled: Boolean,
+    modelValue: String
   },
   computed: {
     getStyles() {
@@ -36,7 +39,11 @@ export default {
       return "color-default";
     },
   },
+  emits: [
+    'update:modelValue'
+  ]
 };
+
 </script>
 
 <style scoped>
@@ -70,7 +77,7 @@ input {
 #inputBorder {
   border: 2px solid var(--color);
   border-radius: 8px;
-  padding: 18px 12px;
+  padding: 14px 12px;
 }
 
 #label {
