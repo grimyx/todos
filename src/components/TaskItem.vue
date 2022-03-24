@@ -2,7 +2,7 @@
     <div id="todo-item">
         <input type="checkbox" :disabled="props.isDone" 
         :checked="props.isDone" @change="$emit('task-checked', props.taskId)"/>
-        <p>{{props.task}}</p>
+        <p :class="{'strike-text' : props.isDone}">{{props.task}}</p>
         <IconButton :icon="deleteIcon" @click="$emit('delete-task', props.taskId)" v-if="props.isDone" />
     </div>
 </template>
@@ -29,6 +29,7 @@ input {
     margin-right: 1rem;
     justify-self: flex-start;
 }
+
 input:disabled {
     color: blue;
 }
@@ -36,5 +37,8 @@ input:disabled {
 delete-btn {
     justify-self: flex-end;
 }
-/* stil ide posle */
+
+.strike-text {
+    text-decoration: line-through;
+}
 </style>

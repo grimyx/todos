@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <h1>#todos</h1>
-    <ButtonGroup :buttons="btns" @selected-filter="gg" />
+    <ButtonGroup :buttons="btns" @selected-filter="selectSortButton" />
     <TaskInput v-if="!btns[2].selected" @task-name="newTask"/>
     <TodoList :tasks="filterTasks(filterOption.filter, tasks)" @task-checked="taskChecked" @delete-task="deleteTask"/>
   </div>
@@ -12,24 +12,26 @@ import { reactive, watch } from 'vue';
 import ButtonGroup from './components/ButtonGroup.vue';
 import TodoList from './components/TaskList.vue';
 import TaskInput from './components/TaskInput.vue';
+//import { getTasks, setTasks } from './TasksModel';
 
 const tasks = reactive([
   {
     taskId: 0,
-    task: "Kupi Sarmu",
+    task: "Buy bread",
     isDone: false,
   },
   {
     taskId: 1,
-    task: "Kupi sira braleeee",
+    task: "Go to school",
     isDone: false,
   },
   {
     taskId: 2,
-    task: "Kupi secer braleeeee",
+    task: "Watch Star Wars",
     isDone: false,
   }
 ]);
+
 
 // Values for buttons
 const btns = reactive([
@@ -77,8 +79,7 @@ const taskChecked = (id) => {
   tasks.filter(task => task.taskId === id)[0].isDone = true;
 }
 
-const gg = (id) => {
-  console.log('Radi', id);
+const selectSortButton = (id) => {
   btns.forEach(option => option.id === id ? option.selected = true : option.selected = false);
 }
 
@@ -106,7 +107,9 @@ const newTask = (task) => {
 
 watch(btns, (newState) => {
   filterOption.filter = newState.filter(option => option.selected )[0].filterEmit;
-})
+});
+
+
 </script>
 
 <style lang="scss">
